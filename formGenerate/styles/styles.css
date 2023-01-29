@@ -1,0 +1,78 @@
+body{
+    box-sizing: border-box;
+    height: 100vh;
+    
+    background: linear-gradient(64.57deg, #E2E2E2 -4.46%, #797979 199.64%);
+}
+
+#root{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    min-height: 500px;
+    margin-top: 150px;
+    margin-right: auto;
+    margin-left: auto;
+
+    border: 3px solid #333;
+    background-image: url(../img/Negative0-28-28\(1\).jpg);
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+}
+.generated-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 500px;
+    min-height: 200px;
+    padding: 20px;
+
+    color: #fff;
+
+    background: rgba(0, 0, 0, 0.199);
+    backdrop-filter: blur(4px);
+}
+.generated-label{
+    margin-bottom: 5px;
+
+    font-size: 20px;
+}
+.generated-box-label{
+    margin-bottom: 5px;
+}
+.generated-input{
+    height: 30px;
+    padding: 5px 20px;
+    margin-bottom: 15px;
+    
+    font-size: 16px;
+    color: #fff;
+
+    border: 2px solid rgb(202, 202, 202);
+    background: transparent;
+}
+textarea.generated-input{
+    height: 100px;
+
+    resize: none;
+}
+.generated-input:focus{
+    outline: none;
+}
+.generated-box-input{
+    width: 20px;
+    margin-bottom: 8px;
+}
+.generated-button{
+    max-width: 200px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+
+    font-size: 16px;
+    color: #fff;
+
+    border: 2px solid rgb(202, 202, 202);
+    background: transparent;
+}
