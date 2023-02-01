@@ -1,11 +1,22 @@
-window.addEventListener("DOMContentLoaded", async () => {
+window.addEventListener("DOMContentLoaded", () => {
 
-    const response = await fetch("./data/form-test-3.json"); // получаю json файл
-    let json = await response.json(); // читаю json файл
+    let selectForm = document.getElementById("selectForm");
+    
     
     let root = document.getElementById("root");
 
-    root.innerHTML = formGenerate(json);
+    selectForm.addEventListener("change", async () => {
+        let link = selectForm.value;
+
+        if(link !== "noForm") {
+            let response = await fetch(link); // получаю json файл
+            let json = await response.json(); // читаю json файл
+            root.innerHTML = formGenerate(json);
+        }else{
+            root.innerHTML = '';
+        }
+    });
+
     function formGenerate (json) {
         return `
             <form class = "generated-form">
@@ -36,6 +47,24 @@ window.addEventListener("DOMContentLoaded", async () => {
                                         `
                                     }).join("")
                                 }
+                            `
+                        }else if(el.attrs.type === "select"){
+                            return `
+                                <label class = "generated-label" for = ${el.attrs.name}>
+                                    ${el.label}
+                                </label>
+                                <select name=${el.attrs.name} id=${el.attrs.name}>
+                                    ${
+                                        el.attrs.variants.map((el2) => {
+                                            return `
+                                                 
+                                                <option value = ${el2.value}>
+                                                    ${el2.label}
+                                                </option>
+                                            `
+                                        }).join("")
+                                    }
+                                </select>
                             `
                         }else if(el.attrs.type === "textarea"){
                             return `
