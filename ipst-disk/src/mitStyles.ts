@@ -8,8 +8,10 @@ const appMui: TApp = {
     app: {
         boxSizing: "border-box",
 
-        width: "100%",
+        maxWidth: "1800px",
         minHeight: "100vh",
+        marginRight: "auto",
+        marginLeft: "auto",
     }
 }
 export default appMui

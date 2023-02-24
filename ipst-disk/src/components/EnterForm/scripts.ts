@@ -2,7 +2,8 @@ import { AnyAction, Dispatch, EntityState, ThunkDispatch } from "@reduxjs/toolki
 import {
     fetchRegister,
 } from '../../features/Autorization/registerSlise';
-import { AxiosStatic } from "axios";
+import axios, { AxiosStatic } from "axios";
+import { TPostParams } from "../../features/types";
 
 export class PostParameters { 
     link: string
@@ -22,15 +23,19 @@ export class PostParameters {
     }
 };
 
-type TDispatch = ThunkDispatch<{
-    token: EntityState<unknown> & {
-        token: string;
-    };
-}, AxiosStatic, AnyAction> & Dispatch<AnyAction>;
+
+    const registerPost = async(params: TPostParams) => {
+        await axios.post(params.link, params.fields)
+        .then((res) => { 
+            sessionStorage.setItem("token", res.data.token);
+        })
+        .catch(() => {
+            console.log("АЫАЫАЫАЫАЫААЫ");
+        });
+    }
 
 export async function submitHandle(
     e :React.FormEvent<HTMLFormElement>,
-    dispatch: TDispatch,
     link: string
     ) {
     e.preventDefault();
@@ -38,7 +43,6 @@ export async function submitHandle(
     let inputs = form.querySelectorAll("input");
     let params = new PostParameters(inputs, link);
 
-    await dispatch(fetchRegister(params));
-    console.log("scripts loaded")
+    await registerPost(params);
 };
 

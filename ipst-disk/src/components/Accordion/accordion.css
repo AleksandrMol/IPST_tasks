@@ -1,0 +1,18 @@
+.accordion-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    padding-right: 20px;
+    padding-left: 20px;
+
+    color: var(--mainColor);
+    font-weight: 500;
+
+    border-bottom: 2px solid var(--mainColor);
+
+    cursor: pointer;
+}
+.accordion-arrow.rotate{
+    transform: rotate(180deg);
+}

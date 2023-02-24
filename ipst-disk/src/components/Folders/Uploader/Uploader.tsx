@@ -1,18 +1,20 @@
 import React from 'react';
 import styles from "./muiStyles";
 import FileUpload from "react-mui-fileuploader";
-import { ExtendedFileProps } from 'react-mui-fileuploader/dist/types/index.types';
 import { Button } from '@mui/material';
 import { handleFilesChange, uploadFiles } from './scripts';
-import { useAppSelector } from '../../../app/hooks';
-import { registerToken } from '../../../features/Autorization/registerSlise';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { TState } from './types';
 
+interface IUploaderProps {
+  folderId: string,
+}
 
+export function Uploader({folderId}: IUploaderProps) {
+  const [filesToUpload, setFilesToUpload] = React.useState<TState>([]);
 
-export function Uploader() {
-  const [filesToUpload, setFilesToUpload] = React.useState<ExtendedFileProps[]>([]);
+  const dispatch = useAppDispatch();
 
-  const regToken = useAppSelector(registerToken);
 
 
   return (
@@ -20,10 +22,15 @@ export function Uploader() {
       <FileUpload
         multiFile={true}
         header="Drag with mouse"
-        onFilesChange={(files) => {handleFilesChange({files, setFilesToUpload})}}
+        onFilesChange={(files) => {handleFilesChange({files, setFilesToUpload, path : `${folderId}`})}}
         onContextReady={(context) => {}}
+        containerProps = {{sx: styles.container}}
+        BannerProps={{
+          sx: styles.banner
+        }}
+    
       />
-      <Button onClick={() => {uploadFiles(filesToUpload, regToken.token)}} variant="contained" id="uploadButton">
+      <Button sx = {styles.button} onClick={() => {uploadFiles(filesToUpload, dispatch)}} variant="contained" id="uploadButton">
         Upload
       </Button>
     </>

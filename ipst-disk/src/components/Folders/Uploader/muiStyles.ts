@@ -24,6 +24,19 @@ const uploaderMui: TUploader = {
         borderRadius: 15,
 
         transform: 'translate(-50%, -50%)',
-    }
+    },
+    banner: {
+        marginTop: "15px",
+        background: "linear-gradient(85.21deg, #188054 2.78%, #23BB52 97.1%);"
+    },
+    container:{
+        marginBottom: "15px",
+    },
+    button: {
+        background: "#188054",
+        "&:hover":{
+            background: "#23BB52",
+        }
+    },
 }
 export default uploaderMui

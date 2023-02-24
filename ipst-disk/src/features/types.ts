@@ -5,7 +5,6 @@ export type TPostParams = {
     }
 }
 
-
 export type TypesedObjDeep<T> = {
     [N in keyof /*перебирает ключи из объектов*/ T]: T[N] extends object ? TypesedObjDeep<T[N]> : T[N]
 }
@@ -32,4 +31,9 @@ export interface IFoldersState {
         name: string,
         children: Array<IFolder | IFile>
     }
+}
+
+export interface IFetchFoldersProps {
+    token: string,
+    folderId?: string
 }

@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { IFoldersState } from '../types';
+import { IFoldersState, IFetchFoldersProps } from '../types';
 import { RootState } from '../../app/store';
 
 export const fetchGetFolder = createAsyncThunk(
     'desk/fetchGetFolder',
-    async(token: string) => {
-        const response = await axios.get(`http://91.193.183.139:7000/drive/folder/root`, {
+    async({...props}: IFetchFoldersProps) => {
+        const response = await axios.get(`http://91.193.183.139:7000/drive/folder/${props.folderId !== "folders" && props.folderId !== ""? props.folderId : "root"}`, {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${props.token}`,
             }
           }).then((res) => {
             const data = res.data.data;
@@ -36,16 +36,16 @@ export const foldersSlice = createSlice({
         builder
         .addCase(fetchGetFolder.pending, (state) => { //процесс загрузки
             state.data.id = "loading";
-            console.log("loading");
+            // console.log("loading");
         })
         .addCase(fetchGetFolder.fulfilled, (state, action) => { // если загрузка успешна, обновляю состояние 
-            console.log("fulfilled");
+            // console.log("fulfilled");
             state.data = action.payload;
-            console.log(state.data);
+            // console.log(state.data);
         })
         .addCase(fetchGetFolder.rejected, (state) => { // если ошибка
             state.data.id = "error";
-            console.log("error");
+            // console.log("error");
             return
         });
     },
